@@ -39,13 +39,19 @@ def copy_tables(connectionStringSrc, connectionStringDst):
                             curDst0.execute(qr2)
                     # =======================================================
                     condition = ""
-                    query1 = "SELECT * FROM {} {};".format(table_name, condition)
+                    # query1 = "SELECT * FROM {} {};".format(table_name, condition)
+                    query1 = "SELECT * FROM {} {}".format(table_name, condition)
                     queryCOUNT = f"SELECT COUNT(*) FROM {table_name};"
                     with connDst.cursor() as curDst:
                         with connSrc.cursor() as curSrc3:
                             # ================================================
                             curSrc3.execute(queryCOUNT)
                             for cur in curSrc3.fetchall():
+                                if int(cur[0]) > 100000:
+                                    query1 += " limit 100000;"
+                                else:
+                                    query1 += ";"
+                                print(query1)
                                 print(f"Table {table_name} SOURCE count = {cur[0]}")
                             # ================================================
                             curSrc3.execute(query1)
