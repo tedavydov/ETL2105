@@ -1,0 +1,49 @@
+version: "3"
+services:
+    db1:
+        image: "postgres:11"
+        container_name: "my_postgres1"
+        networks:
+            - my_network
+        ports:
+            - "54320:5432"
+        volumes:
+            - my_dbdata:/var/lib/postgresql/data
+            - ${HOME}/tpch-kit/:/var/lib/postgresql/tpch:rw
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=root
+    db2:
+        image: "postgres:11"
+        container_name: "my_postgres2"
+        networks:
+            - my_network
+        ports:
+            - "5433:5432"
+        volumes:
+            - my_dbdata:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=root
+
+    airflow:
+        image: puckel/docker-airflow
+        container_name: "airflow"
+        networks:
+            - my_network
+        ports:
+            - "8080:8080"
+        environment:
+            - PYTHONPATH=/usr/local/airflow/operators/
+        volumes:
+            - my_dbdata:/usr/local/airflow/data
+            - ${HOME}/dags/:/usr/local/airflow/dags
+            - ${HOME}/dags/operators/:/usr/local/airflow/operators/
+        command: webserver
+
+networks:
+    my_network:
+        driver: bridge
+
+volumes:
+    my_dbdata:
