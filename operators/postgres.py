@@ -18,10 +18,16 @@ def table_list(connect_par):
 
 class DataTransferPostgres(DataTransfer):
     def __init__(
-            self, source_pg_conn_str, query, *args, **kwargs
+            self, config,
+            source_pg_conn_str, pg_conn_str, pg_meta_conn_str,
+            query, *args, **kwargs
     ):
         super(DataTransferPostgres, self).__init__(
-            source_pg_conn_str=source_pg_conn_str, query=query, *args, **kwargs
+            config=config,
+            # source_pg_conn_str=source_pg_conn_str,
+            pg_conn_str=pg_conn_str,
+            pg_meta_conn_str=pg_meta_conn_str,
+            query=query, *args, **kwargs
         )
         self.source_pg_conn_str = source_pg_conn_str
         self.query = query

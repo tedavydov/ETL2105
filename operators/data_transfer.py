@@ -1,6 +1,7 @@
 import logging
 import os
 import time
+import datetime
 import psycopg2
 from contextlib import contextmanager
 from airflow.models import BaseOperator
@@ -10,7 +11,10 @@ from operators.utils import DataFlowBaseOperator
 
 class DataTransfer(DataFlowBaseOperator):  # modify
     @apply_defaults
-    def __init__(self, config, pg_conn_str, pg_meta_conn_str, date_check=False, *args, **kwargs):
+    def __init__(self, config,
+                 pg_conn_str,
+                 pg_meta_conn_str,
+                 date_check=False, *args, **kwargs):
         super(DataTransfer, self).__init__(
             *args,
             **kwargs
