@@ -2,6 +2,7 @@ import psycopg2
 import logging
 from airflow.models import BaseOperator
 
+
 class DataFlowBaseOperator(BaseOperator):
     def __init__(self, pg_meta_conn_str, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -31,35 +32,33 @@ class DataFlowBaseOperator(BaseOperator):
             logging.info('Log update: {target_table} : {job_id}'.format(**config))
             conn.commit()
 
-
     def write_etl_statistic(self, config):
         with psycopg2.connect(self.pg_meta_conn_str) as conn, conn.cursor() as cursor:
             query = '''
             insert into statistic (
                    table_name
                  , column_name
-                 , cnt_nulls
-                 , cnt_all
+                 , cnt_null
+                 , cnt_full
                  , load_date
             )
             with x as (
                 select '{table}' as table_name
                      , '{column}' as column_name
-                     , {cnt_nulls} as cnt_nulls
-                     , {cnt_all} as cnt_all
-                     , {launch_id} as launch_id
+                     , {cnt_null} as cnt_null
+                     , {cnt_full} as cnt_full
+                     , {job_id} as launch_id
             )
             select table_name
                  , column_name
-                 , cnt_nulls
-                 , cnt_all
-                 , load_date
+                 , cnt_null
+                 , cnt_full
+                 , '{dt}' as load_date
               from x left join log l
                 on x.launch_id = l.target_launch_id
             '''
             cursor.execute(query.format(**config))
             conn.commit()
-
 
     def get_load_dates(self, config):
         with psycopg2.connect(self.pg_meta_conn_str) as conn, conn.cursor() as cursor:
@@ -76,4 +75,3 @@ class DataFlowBaseOperator(BaseOperator):
             return dates
         else:
             return []
-

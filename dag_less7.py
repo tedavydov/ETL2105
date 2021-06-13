@@ -4,7 +4,7 @@ from datetime import datetime
 
 connect = {'src': "host='db1' port=5432 dbname='my_database' user='root' password='postgres'",
            'dest': "host='db2' port=5432 dbname='my_database' user='root' password='postgres'",
-           'meta': "host='db1' port=5432 dbname='my_database' user='root' password='postgres'"}
+           'meta': "host='db2' port=5432 dbname='my_database' user='root' password='postgres'"}
 
 DEFAULT_ARGS = {
     "owner": "airflow",
@@ -25,19 +25,8 @@ with DAG(
     for tab in table_list(connect['src']):
         tab_task = DataTransferPostgres(
             config={'table': f'public.{tab}'},
-            query=f'select * from {tab}',
+            query=f'select * from {tab} limit 500000',  # добавил ограничение - на слабой виртуалке не тянет
             task_id=f'{tab}',
             source_pg_conn_str=connect['src'],
             pg_conn_str=connect['dest'],
             pg_meta_conn_str=connect['meta'])  # modify
-
-    # t1 = DataTransferPostgres(
-    #     config={'table': 'public.customer'},
-    #     query='select * from customer',
-    #     task_id='customer',
-    #     source_pg_conn_str=connect['src'],
-    #     pg_conn_str=connect['dest'],
-    #     pg_meta_conn_str=connect['meta'])  # modify
-    #     # source_pg_conn_str="host='db2' port=5432 dbname='tpch' user='postgres' password='postgres'",
-    #     # pg_conn_str="host='db1' port=5432 dbname='my_database2' user='admin' password='postgres'",
-    #     # pg_meta_conn_str="host='db1' port=5432 dbname='my_database2' user='admin' password='postgres'", # modify
