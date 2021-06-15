@@ -1,0 +1,360 @@
+groups:
+  hubs:
+    part:
+      links: { }
+      satellites:
+        name: { }
+        mfgr:
+          dtype: { }
+        brand:
+          dtype: { }
+        type:
+          dtype: { }
+        size:
+          dtype: { }
+        container:
+          dtype: { }
+        retailprice:
+          dtype: { }
+        comment:
+          dtype: { }
+    supplier:
+      bk_dtype: int
+      links:
+        nation: { }
+      satellites:
+        name:
+          dtype: { }
+        addres:
+          dtype: { }
+        phone:
+          dtype: { }
+        acctbal:
+          dtype: { }
+        comment:
+          dtype: { }
+    partsupp:
+      bk_dtype: int
+      links:
+        supplier: { }
+        part: { }
+      satellites:
+        availqty:
+          dtype: { }
+        sypplycost:
+          dtype: { }
+        comment:
+          dtype: { }
+    lineitem:
+      bk_dtype: int
+      links:
+        partsupp: { }
+        orders: { }
+      satellites:
+        linenumber:
+          dtype: { }
+        quantity:
+          dtype: { }
+        extendedprice:
+          dtype: { }
+        discount:
+          dtype: { }
+        tax:
+          dtype: { }
+        returnflag:
+          dtype: { }
+        linestatus:
+          dtype: { }
+        shipdate:
+          dtype: { }
+        commitdate:
+          dtype: { }
+        receiptdate:
+          dtype: { }
+        shipinstruct:
+          dtype: { }
+        shipmode:
+          dtype: { }
+        comment:
+          dtype: { }
+    orders:
+      bk_dtype: int
+      links:
+        customer: { }
+      satellites:
+        orderstatus:
+          dtype: { }
+        totalprice:
+          dtype: { }
+        orderdate:
+          dtype: { }
+        orderpriority:
+          dtype: { }
+        shippriority:
+          dtype: { }
+        clerk:
+          dtype: { }
+        comment:
+          dtype: { }
+    customer:
+      bk_dtype: int
+      links:
+        nation: { }
+      satellites:
+        name:
+          dtype: { }
+        address:
+          dtype: { }
+        phone:
+          dtype: { }
+        acctbal:
+          dtype: { }
+        mktsegment:
+          dtype: { }
+        comment:
+          dtype: { }
+    nation:
+      bk_dtype: int
+      links:
+        region: { }
+      satellites:
+        name:
+          dtype: { }
+        comment:
+          dtype: { }
+    region:
+      bk_dtype: int
+      links: { }
+      satellites:
+        name:
+          dtype: { }
+        comment:
+          dtype: { }
+sources:
+  tables:
+    part:
+      columns:
+        - partkey:
+            bk_for: part
+        - name:
+            source_for:
+              hub: part
+              satellite: name
+        - mfgr:
+            source_for:
+              hub: part
+              satellite: mfgr
+        - brand:
+            source_for:
+              hub: part
+              satellite: brand
+        - type:
+            source_for:
+              hub: part
+              satellite: type
+        - size:
+            source_for:
+              hub: part
+              satellite: size
+        - container:
+            source_for:
+              hub: part
+              satellite: container
+        - comment:
+            source_for:
+              hub: part
+              satellite: comment
+    supplier:
+      columns:
+        - suppkey:
+            bk_for: supplier
+        - name:
+            source_for:
+              hub: supplier
+              satellite: name
+        - address:
+            source_for:
+              hub: supplier
+              satellite: address
+        - nationkey:
+            bk_for: nation
+        - phone:
+            source_for:
+              hub: supplier
+              satellite: phone
+        - acctbal:
+            source_for:
+              hub: supplier
+              satellite: acctbal
+        - comment:
+            source_for:
+              hub: supplier
+              satellite: comment
+    partsupp:
+      columns:
+        - hashkey:
+            bk_for: partsupp
+        - partkey:
+            bk_for: part
+        - suppkey:
+            bk_for: supplier
+        - availqty:
+            source_for:
+              hub: partsupp
+              satellite: availqty
+        - supplycost:
+            source_for:
+              hub: partsupp
+              satellite: supplycost
+        - comment:
+            source_for:
+              hub: partsupp
+              satellite: comment
+    lineitem:
+      columns:
+        - orderkey:
+            bk_for: orders
+        - partkey:
+            bk_for: part
+        - suppkey:
+            bk_for: supplier
+        - linenumber:
+            bk_for: lineitem
+        - quantity:
+            source_for:
+              hub: lineitem
+              satellite: quantity
+        - extendedprice:
+            source_for:
+              hub: lineitem
+              satellite: extendedprice
+        - discount:
+            source_for:
+              hub: lineitem
+              satellite: discount
+        - tax:
+            source_for:
+              hub: lineitem
+              satellite: tax
+        - returnflag:
+            source_for:
+              hub: lineitem
+              satellite: returnflag
+        - linestatus:
+            source_for:
+              hub: lineitem
+              satellite: linestatus
+        - shipdate:
+            source_for:
+              hub: lineitem
+              satellite: shipdate
+        - commitdate:
+            source_for:
+              hub: lineitem
+              satellite: commitdate
+        - receiptdate:
+            source_for:
+              hub: lineitem
+              satellite: receiptdate
+        - shipinstruct:
+            source_for:
+              hub: lineitem
+              satellite: shipinstruct
+        - shipmode:
+            source_for:
+              hub: lineitem
+              satellite: shipmode
+        - comment:
+            source_for:
+              hub: lineitem
+              satellite: comment
+    orders:
+      columns:
+        - orderkey:
+            bk_for: orders
+        - custkey:
+            bk_for: customer
+        - orderstatus:
+            source_for:
+              hub: orders
+              satellite: orderstatus
+        - totalprice:
+            source_for:
+              hub: orders
+              satellite: totalprice
+        - orderdate:
+            source_for:
+              hub: orders
+              satellite: orderdate
+        - orderpriority:
+            source_for:
+              hub: orders
+              satellite: orderpriority
+        - shippriority:
+            source_for:
+              hub: orders
+              satellite: shippriority
+        - clerk:
+            source_for:
+              hub: orders
+              satellite: clerk
+        - comment:
+            source_for:
+              hub: orders
+              satellite: comment
+    customer:
+      columns:
+        - custkey:
+            bk_for: customer
+        - name:
+            source_for:
+              hub: customer
+              satellite: name
+        - address:
+            source_for:
+              hub: customer
+              satellite: address
+        - nationkey:
+            bk_for: nation
+        - phone:
+            source_for:
+              hub: customer
+              satellite: phone
+        - acctbal:
+            source_for:
+              hub: customer
+              satellite: acctbal
+        - mktsegment:
+            source_for:
+              hub: customer
+              satellite: mktsegment
+        - comment:
+            source_for:
+              hub: customer
+              satellite: comment
+    nation:
+      columns:
+        - nationkey:
+            bk_for: nation
+        - name:
+            source_for:
+              hub: nation
+              satellite: name
+        - regionkey:
+            bk_for: region
+        - comment:
+            source_for:
+              hub: nation
+              satellite: comment
+    region:
+      columns:
+        - regionkey:
+            bk_for: region
+        - name:
+            source_for:
+              hub: region
+              satellite: name
+        - comment:
+            source_for:
+              hub: region
+              satellite: comment
