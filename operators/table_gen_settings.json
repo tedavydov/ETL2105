@@ -1,0 +1,427 @@
+{
+  "sae": {
+    "nation": {
+      "nation_bk": "integer not null",
+      "name": "char(25) not null",
+      "region_bk": "integer not null",
+      "comment": "varchar(152)"
+    },
+    "region": {
+      "region_bk": "integer not null",
+      "name": "char(25) not null",
+      "comment": "varchar(152)"
+    },
+    "part": {
+      "part_bk": "integer not null",
+      "name": "varchar(55) not null",
+      "mfgr": "char(25) not null",
+      "brand": "char(10) not null",
+      "type": "varchar(25) not null",
+      "size": "integer not null",
+      "container": "char(10) not null",
+      "retailprice": "decimal(15,2) not null",
+      "comment": "varchar(23) not null"
+    },
+    "supplier": {
+      "supplier_bk": "integer not null",
+      "name": "char(55) not null",
+      "address": "varchar(40) not null",
+      "nation_bk": "integer not null",
+      "phone": "char(15) not null",
+      "acctbal": "decimal(15,2) not null",
+      "comment": "varchar(101) not null"
+    },
+    "partsupp": {
+      "part_bk": "integer not null",
+      "supplier_bk": "integer not null",
+      "availqty": "integer not null",
+      "supplycost": "decimal(15,2) not null",
+      "comment": "varchar(199) not null"
+    },
+    "customer": {
+      "customer_bk": "integer not null",
+      "name": "varchar(25) not null",
+      "address": "varchar(40) not null",
+      "nation_bk": "integer not null",
+      "phone": "char(15) not null",
+      "acctbal": "decimal(15,2) not null",
+      "mktsegment": "char(10) not null",
+      "comment": "varchar(117) not null"
+    },
+    "orders": {
+      "orders_bk": "integer not null",
+      "customer_bk": "integer not null",
+      "orderstatus": "char(1) not null",
+      "totalprice": "decimal(15,2) not null",
+      "orderdate": "date not null",
+      "orderpriority": "char(15) not null",
+      "clerk": "char(15) not null",
+      "shippriority": "integer not null",
+      "comment": "varchar(79) not null"
+    },
+    "lineitem": {
+      "orders_bk": "integer not null",
+      "part_bk": "integer not null",
+      "supplier_bk": "integer not null",
+      "lineitem_bk": "integer not null",
+      "quantity": "decimal(15,2) not null",
+      "extendedprice": "decimal(15,2) not null",
+      "discount": "decimal(15,2) not null",
+      "tax": "decimal(15,2) not null",
+      "returnflag": "char(1) not null",
+      "linestatus": "char(1) not null",
+      "shipdate": "date not null",
+      "commitdate": "date not null",
+      "receiptdate": "date not null",
+      "shipinstruct": "char(25) not null",
+      "shipmode": "char(10) not null",
+      "comment": "varchar(44) not null"
+    },
+    "postfix": ", launch_id int, effective_dttm timestamp default now()"
+  },
+  "sal": {
+    "nation": {
+      "nation_bk": "integer not null",
+      "name": "char(25) not null",
+      "region_bk": "integer not null",
+      "comment": "varchar(152)"
+    },
+    "region": {
+      "region_bk": "integer not null",
+      "name": "char(25) not null",
+      "comment": "varchar(152)"
+    },
+    "part": {
+      "part_bk": "integer not null",
+      "name": "varchar(55) not null",
+      "mfgr": "char(25) not null",
+      "brand": "char(10) not null",
+      "type": "varchar(25) not null",
+      "size": "integer not null",
+      "container": "char(10) not null",
+      "retailprice": "decimal(15,2) not null",
+      "comment": "varchar(23) not null"
+    },
+    "supplier": {
+      "supplier_bk": "integer not null",
+      "name": "char(55) not null",
+      "address": "varchar(40) not null",
+      "nation_bk": "integer not null",
+      "phone": "char(15) not null",
+      "acctbal": "decimal(15,2) not null",
+      "comment": "varchar(101) not null"
+    },
+    "partsupp": {
+      "part_bk": "integer not null",
+      "supplier_bk": "integer not null",
+      "availqty": "integer not null",
+      "supplycost": "decimal(15,2) not null",
+      "comment": "varchar(199) not null"
+    },
+    "customer": {
+      "customer_bk": "integer not null",
+      "name": "varchar(25) not null",
+      "address": "varchar(40) not null",
+      "nation_bk": "integer not null",
+      "phone": "char(15) not null",
+      "acctbal": "decimal(15,2) not null",
+      "mktsegment": "char(10) not null",
+      "comment": "varchar(117) not null"
+    },
+    "orders": {
+      "orders_bk": "integer not null",
+      "customer_bk": "integer not null",
+      "orderstatus": "char(1) not null",
+      "totalprice": "decimal(15,2) not null",
+      "orderdate": "date not null",
+      "orderpriority": "char(15) not null",
+      "clerk": "char(15) not null",
+      "shippriority": "integer not null",
+      "comment": "varchar(79) not null"
+    },
+    "lineitem": {
+      "orders_bk": "integer not null",
+      "part_bk": "integer not null",
+      "supplier_bk": "integer not null",
+      "lineitem_bk": "integer not null",
+      "quantity": "decimal(15,2) not null",
+      "extendedprice": "decimal(15,2) not null",
+      "discount": "decimal(15,2) not null",
+      "tax": "decimal(15,2) not null",
+      "returnflag": "char(1) not null",
+      "linestatus": "char(1) not null",
+      "shipdate": "date not null",
+      "commitdate": "date not null",
+      "receiptdate": "date not null",
+      "shipinstruct": "char(25) not null",
+      "shipmode": "char(10) not null",
+      "comment": "varchar(44) not null"
+    },
+    "postfix": ", launch_id int, effective_dttm timestamp default now()"
+  },
+  "dds": {
+    "h_customer": {
+      "customer_id": "SERIAL PRIMARY KEY",
+      "customer_bk": "INTEGER UNIQUE NOT NULL"
+    },
+    "s_customer_name": {
+      "customer_id": "INTEGER NOT NULL",
+      "name": "VARCHAR(25) NOT NULL"
+    },
+    "s_customer_address": {
+      "customer_id": "INTEGER NOT NULL",
+      "address": "VARCHAR(40) NOT NULL"
+    },
+    "s_customer_phone": {
+      "customer_id": "INTEGER NOT NULL",
+      "phone": "CHAR(15) NOT NULL"
+    },
+    "s_customer_acctbal": {
+      "customer_id": "INTEGER NOT NULL",
+      "acctbal": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_customer_mktsegment": {
+      "customer_id": "INTEGER NOT NULL",
+      "mktsegment": "CHAR(10) NOT NULL"
+    },
+    "s_customer_comment": {
+      "customer_id": "INTEGER NOT NULL",
+      "comment": "VARCHAR(117) NOT NULL"
+    },
+    "h_part": {
+      "part_id": "SERIAL PRIMARY KEY",
+      "part_bk": "INTEGER UNIQUE NOT NULL"
+    },
+    "s_part_name": {
+      "part_id": "INTEGER NOT NULL",
+      "name": "VARCHAR(55) NOT NULL"
+    },
+    "s_part_mfgr": {
+      "part_id": "INTEGER NOT NULL",
+      "mfgr": "CHAR(25) NOT NULL"
+    },
+    "s_part_brand": {
+      "part_id": "INTEGER NOT NULL",
+      "brand": "CHAR(10) NOT NULL"
+    },
+    "s_part_type": {
+      "part_id": "INTEGER NOT NULL",
+      "type": "VARCHAR(25) NOT NULL"
+    },
+    "s_part_size": {
+      "part_id": "INTEGER NOT NULL",
+      "size": "INTEGER NOT NULL"
+    },
+    "s_part_container": {
+      "part_id": "INTEGER NOT NULL",
+      "container": "CHAR(10) NOT NULL"
+    },
+    "s_part_retailprice": {
+      "part_id": "INTEGER NOT NULL",
+      "retailprice": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_part_comment": {
+      "part_id": "INTEGER NOT NULL",
+      "comment": "VARCHAR(23) NOT NULL"
+    },
+    "h_supplier": {
+      "supplier_id": "SERIAL PRIMARY KEY",
+      "supplier_bk": "INTEGER UNIQUE NOT NULL"
+    },
+    "s_supplier_name": {
+      "supplier_id": "INTEGER NOT NULL",
+      "name": "CHAR(55) NOT NULL"
+    },
+    "s_supplier_address": {
+      "supplier_id": "INTEGER NOT NULL",
+      "address": "VARCHAR(40) NOT NULL"
+    },
+    "s_supplier_phone": {
+      "supplier_id": "INTEGER NOT NULL",
+      "phone": "CHAR(15) NOT NULL"
+    },
+    "s_supplier_acctbal": {
+      "supplier_id": "INTEGER NOT NULL",
+      "acctbal": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_supplier_comment": {
+      "supplier_id": "INTEGER NOT NULL",
+      "comment": "VARCHAR(101) NOT NULL"
+    },
+    "h_partsupp": {
+      "partsupp_id": "SERIAL PRIMARY KEY",
+      "partsupp_bk":  "TEXT UNIQUE NOT NULL"
+    },
+    "s_partsupp_availqty": {
+      "partsupp_id": "INTEGER NOT NULL",
+      "availqty": "INTEGER NOT NULL"
+    },
+    "s_partsupp_supplycost": {
+      "partsupp_id": "INTEGER NOT NULL",
+      "supplycost": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_partsupp_comment": {
+      "partsupp_id": "INTEGER NOT NULL",
+      "comment": "VARCHAR(199) NOT NULL"
+    },
+    "h_lineitem": {
+      "lineitem_id": "SERIAL PRIMARY KEY",
+      "lineitem_bk": "INTEGER UNIQUE NOT NULL"
+    },
+    "s_lineitem_quantity": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "quantity": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_lineitem_extendedprice": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "extendedprice": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_lineitem_discount": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "discount": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_lineitem_tax": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "tax": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_lineitem_returnflag": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "returnflag": "CHAR(1) NOT NULL"
+    },
+    "s_lineitem_linestatus": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "linestatus": "CHAR(1) NOT NULL"
+    },
+    "s_lineitem_shipdate": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "shipdate": "DATE NOT NULL"
+    },
+    "s_lineitem_commitdate": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "commitdate": "DATE NOT NULL"
+    },
+    "s_lineitem_receiptdate": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "receiptdate": "DATE NOT NULL"
+    },
+    "s_lineitem_shipinstruct": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "shipinstruct": "CHAR(25) NOT NULL"
+    },
+    "s_lineitem_shipmode": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "shipmode": "CHAR(10) NOT NULL"
+    },
+    "s_lineitem_comment": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "comment": "VARCHAR(44) NOT NULL"
+    },
+    "h_orders": {
+      "orders_id": "SERIAL PRIMARY KEY",
+      "orders_bk": "INTEGER UNIQUE NOT NULL"
+    },
+    "s_orders_orderstatus": {
+      "orders_id": "INTEGER NOT NULL",
+      "orderstatus": "CHAR(1) NOT NULL"
+    },
+    "s_orders_totalprice": {
+      "orders_id": "INTEGER NOT NULL",
+      "totalprice": "DECIMAL(15,2) NOT NULL"
+    },
+    "s_orders_orderdate": {
+      "orders_id": "INTEGER NOT NULL",
+      "orderdate": "DATE NOT NULL"
+    },
+    "s_orders_orderpriority": {
+      "orders_id": "INTEGER NOT NULL",
+      "orderpriority": "CHAR(15) NOT NULL"
+    },
+    "s_orders_clerk": {
+      "orders_id": "INTEGER NOT NULL",
+      "clerk": "CHAR(15) NOT NULL"
+    },
+    "s_orders_shippriority": {
+      "orders_id": "INTEGER NOT NULL",
+      "shippriority": "INTEGER NOT NULL"
+    },
+    "s_orders_comment": {
+      "orders_id": "INTEGER NOT NULL",
+      "comment": "VARCHAR(79) NOT NULL"
+    },
+    "h_nation": {
+      "nation_id": "SERIAL PRIMARY KEY",
+      "nation_bk": "INTEGER UNIQUE NOT NULL"
+    },
+    "s_nation_name": {
+      "nation_id": "INTEGER NOT NULL",
+      "name": "CHAR(25) NOT NULL"
+    },
+    "s_nation_comment": {
+      "nation_id": "INTEGER NOT NULL",
+      "comment": "VARCHAR(152)"
+    },
+    "h_region": {
+      "region_id": "SERIAL PRIMARY KEY",
+      "region_bk": "INTEGER UNIQUE NOT NULL"
+    },
+    "s_region_name": {
+      "region_id": "INTEGER NOT NULL",
+      "name": "CHAR(25) NOT NULL"
+    },
+    "s_region_comment": {
+      "region_id": "INTEGER NOT NULL",
+      "comment": "VARCHAR(152)"
+    },
+    "l_nation_region": {
+      "nation_id": "INTEGER NOT NULL",
+      "region_id": "INTEGER NOT NULL"
+    },
+    "l_customer_nation": {
+      "customer_id": "INTEGER NOT NULL",
+      "nation_id": "INTEGER NOT NULL"
+    },
+    "l_orders_customer": {
+      "orders_id": "INTEGER NOT NULL",
+      "customer_id": "INTEGER NOT NULL"
+    },
+    "l_lineitem_orders": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL"
+    },
+    "l_lineitem_partsupp": {
+      "lineitem_id": "INTEGER NOT NULL",
+      "partsupp_id": "INTEGER NOT NULL"
+    },
+    "l_partsupp_supplier": {
+      "partsupp_id": "INTEGER NOT NULL",
+      "supplier_id": "INTEGER NOT NULL"
+    },
+    "l_partsupp_part": {
+      "partsupp_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL"
+    },
+    "l_supplier_nation": {
+      "supplier_id": "INTEGER NOT NULL",
+      "nation_id": "INTEGER NOT NULL"
+    },
+    "postfix": ", launch_id int, effective_dttm timestamp default now()"
+  },
+  "public": {
+    "statistic": {
+      "table_name": "text",
+      "column_name": "text",
+      "cnt_null": "int",
+      "cnt_full": "int"
+    },
+    "log": {
+      "source_launch_id": "int",
+      "target_schema": "text",
+      "target_table": "text",
+      "target_launch_id": "int",
+      "processed_dttm": "timestamp default now()",
+      "row_count": "int",
+      "duration": "int"
+    },
+    "postfix": ", load_date date"
+  }
+}
