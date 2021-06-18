@@ -4,31 +4,29 @@ import json
 from airflow.models import BaseOperator
 
 
-def table_gen_str(schema_name_str, table_name_str, json_file="./table_gen_settings.json"):
+def table_gen_str(schema_name_str, table_name_str,
+                  json_file="./dags/operators/table_gen_settings.json"):
     '''
     Считывает параметры таблицы из файла JSON
     :param table_name_str: строка - имя таблицы
-    :param json_file: по умолч. "./table_gen_settings.json"
+    :param json_file: по умолч. "table_gen_settings.json"
     :return: строка подставляемая в запрос для создания таблицы
     '''
     tbl_str = ''
     try:
         with open(json_file, "r", encoding="utf-8") as f:
             sett = json.load(f)
-        if sett:
-            schema = sett.get(schema_name_str)
-            table = schema.get(table_name_str)
-            postfix = schema.get('postfix')
-            for k, it in table:
-                tbl_str += f'{k} {it}, '
-            if postfix:
-                tbl_str += f'{postfix}'
+            if sett:
+                schema = sett.get(schema_name_str.lower())
+                table = schema.get(table_name_str.lower())
+                postfix = schema.get('postfix')
+                tbl_str += ", ".join(f'{k} {table[k]}' for k in table.keys())
+                if postfix:
+                    tbl_str += f'{postfix}'
+                return tbl_str
     # -----------------------------------
     except Exception as e:
-        # print('=' * 100, f'\n table_gen_str load settings ERROR: Ошибка чтения JSON файла {file_name}\n{e}')
-        logging.info('table_gen_str() ERROR JSON LOAD: for table {} ERROR info: {}'.format(table_name_str, e))
-    # -------------
-    return tbl_str
+        logging.info(f'ERROR JSON LOAD: table_gen_str({schema_name_str}.{table_name_str}) ERROR info: {e}')
 
 
 def table_list(connect_str):
@@ -56,7 +54,7 @@ class DataFlowBaseOperator(BaseOperator):
                 from log
                 where target_launch_id not in (
                 select source_launch_id
-                    from etl.log
+                    from log
                     where target_table = '{target_table}'
                     and target_schema = '{target_schema}'
                     and source_launch_id is not null
@@ -69,7 +67,7 @@ class DataFlowBaseOperator(BaseOperator):
             cursor.execute(query.format(**config))
             ids = cursor.fetchone()[0]
             logging.info('Launch_ids: {}'.format(ids))
-        return tuple(ids.strip('{}').split(',')) if ids else ()
+        return tuple(str(ids).strip('[]').split(',')) if ids else ()
 
     def write_etl_log(self, config):
         with psycopg2.connect(self.pg_meta_conn_str) as conn, conn.cursor() as cursor:

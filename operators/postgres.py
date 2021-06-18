@@ -14,9 +14,9 @@ class DataTransferPostgres(DataTransfer):
             config=config,
             query=query, task_id=task_id, table_src=table_src,
             # source_pg_conn_str=source_pg_conn_str,
-            pg_conn_str = pg_conn_str,
-            pg_meta_conn_str = pg_meta_conn_str,
-            *args, ** kwargs
+            pg_conn_str=pg_conn_str,
+            pg_meta_conn_str=pg_meta_conn_str,
+            *args, **kwargs
         )
         self.source_pg_conn_str = source_pg_conn_str
         self.query = query

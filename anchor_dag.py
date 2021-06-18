@@ -99,12 +99,13 @@ with DAG(
         (hub_name, satellite_name): {
             table_name: DdsSOperator(
                 task_id='dds.s_{hub_name}_{satellite_name}'.format(
-                    hub_name=hub_name, satellite_name=satellite_name),
+                    source_table=hub_name, hub_name=hub_name, satellite_name=satellite_name),
                 # pg_conn_str="host='localhost' port=5433 dbname='my_database2' user='admin' password='postgres'",
                 # pg_meta_conn_str="host='localhost' port=5433 dbname='my_database2' user='admin' password='postgres'",
                 pg_conn_str=connect['dest'],
                 pg_meta_conn_str=connect['meta'],
                 config=dict(
+                    source_table=hub_name,
                     hub_name=hub_name,
                     bk_column=bk_column,
                     satellite_name=satellite_name,

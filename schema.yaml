@@ -3,7 +3,8 @@ groups:
     part:
       links: { }
       satellites:
-        name: { }
+        name:
+          dtype: { }
         mfgr:
           dtype: { }
         brand:
@@ -25,7 +26,7 @@ groups:
       satellites:
         name:
           dtype: { }
-        addres:
+        address:
           dtype: { }
         phone:
           dtype: { }
@@ -41,7 +42,7 @@ groups:
       satellites:
         availqty:
           dtype: { }
-        sypplycost:
+        supplycost:
           dtype: { }
         comment:
           dtype: { }
@@ -51,8 +52,6 @@ groups:
         partsupp: { }
         orders: { }
       satellites:
-        linenumber:
-          dtype: { }
         quantity:
           dtype: { }
         extendedprice:
@@ -134,7 +133,7 @@ sources:
   tables:
     part:
       columns:
-        - partkey:
+        - part_bk:
             bk_for: part
         - name:
             source_for:
@@ -166,7 +165,7 @@ sources:
               satellite: comment
     supplier:
       columns:
-        - suppkey:
+        - supplier_bk:
             bk_for: supplier
         - name:
             source_for:
@@ -176,7 +175,7 @@ sources:
             source_for:
               hub: supplier
               satellite: address
-        - nationkey:
+        - nation_bk:
             bk_for: nation
         - phone:
             source_for:
@@ -194,9 +193,9 @@ sources:
       columns:
         - hashkey:
             bk_for: partsupp
-        - partkey:
+        - part_bk:
             bk_for: part
-        - suppkey:
+        - supplier_bk:
             bk_for: supplier
         - availqty:
             source_for:
@@ -212,13 +211,13 @@ sources:
               satellite: comment
     lineitem:
       columns:
-        - orderkey:
+        - orders_bk:
             bk_for: orders
-        - partkey:
+        - part_bk:
             bk_for: part
-        - suppkey:
+        - supplier_bk:
             bk_for: supplier
-        - linenumber:
+        - lineitem_bk:
             bk_for: lineitem
         - quantity:
             source_for:
@@ -270,9 +269,9 @@ sources:
               satellite: comment
     orders:
       columns:
-        - orderkey:
+        - orders_bk:
             bk_for: orders
-        - custkey:
+        - customer_bk:
             bk_for: customer
         - orderstatus:
             source_for:
@@ -304,7 +303,7 @@ sources:
               satellite: comment
     customer:
       columns:
-        - custkey:
+        - customer_bk:
             bk_for: customer
         - name:
             source_for:
@@ -314,7 +313,7 @@ sources:
             source_for:
               hub: customer
               satellite: address
-        - nationkey:
+        - nation_bk:
             bk_for: nation
         - phone:
             source_for:
@@ -334,13 +333,13 @@ sources:
               satellite: comment
     nation:
       columns:
-        - nationkey:
+        - nation_bk:
             bk_for: nation
         - name:
             source_for:
               hub: nation
               satellite: name
-        - regionkey:
+        - region_bk:
             bk_for: region
         - comment:
             source_for:
@@ -348,7 +347,7 @@ sources:
               satellite: comment
     region:
       columns:
-        - regionkey:
+        - region_bk:
             bk_for: region
         - name:
             source_for:

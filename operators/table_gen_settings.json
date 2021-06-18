@@ -1,6 +1,5 @@
 {
-  "sal": {
-    // from sae
+  "sae": {
     "nation": {
       "nation_bk": "integer not null",
       "name": "char(25) not null",
@@ -33,8 +32,8 @@
       "comment": "varchar(101) not null"
     },
     "partsupp": {
-      "partsupp_bk": "integer not null",
-      "suppkey": "integer not null",
+      "part_bk": "integer not null",
+      "supplier_bk": "integer not null",
       "availqty": "integer not null",
       "supplycost": "decimal(15,2) not null",
       "comment": "varchar(199) not null"
@@ -64,7 +63,7 @@
       "orders_bk": "integer not null",
       "part_bk": "integer not null",
       "supplier_bk": "integer not null",
-      "linenumber": "integer not null",
+      "lineitem_bk": "integer not null",
       "quantity": "decimal(15,2) not null",
       "extendedprice": "decimal(15,2) not null",
       "discount": "decimal(15,2) not null",
@@ -78,348 +77,334 @@
       "shipmode": "char(10) not null",
       "comment": "varchar(44) not null"
     },
-    "postfix": "launch_id int, effective_dttm timestamp default now()"
+    "postfix": ", launch_id int, effective_dttm timestamp default now()"
   },
-  "sae": {
-    // from dss.ddl
-    "NATION": {
-      "NATIONKEY": "INTEGER NOT NULL",
-      "NAME": "CHAR(25) NOT NULL",
-      "REGIONKEY": "INTEGER NOT NULL",
-      "COMMENT": "VARCHAR(152)"
+  "sal": {
+    "nation": {
+      "nation_bk": "integer not null",
+      "name": "char(25) not null",
+      "region_bk": "integer not null",
+      "comment": "varchar(152)"
     },
-    "REGION": {
-      "REGIONKEY": "INTEGER NOT NULL",
-      "NAME": "CHAR(25) NOT NULL",
-      "COMMENT": "VARCHAR(152)"
+    "region": {
+      "region_bk": "integer not null",
+      "name": "char(25) not null",
+      "comment": "varchar(152)"
     },
-    "PART": {
-      "PARTKEY": "INTEGER NOT NULL",
-      "NAME": "VARCHAR(55) NOT NULL",
-      "MFGR": "CHAR(25) NOT NULL",
-      "BRAND": "CHAR(10) NOT NULL",
-      "TYPE": "VARCHAR(25) NOT NULL",
-      "SIZE": "INTEGER NOT NULL",
-      "CONTAINER": "CHAR(10) NOT NULL",
-      "RETAILPRICE": "DECIMAL(15,2) NOT NULL",
-      "COMMENT": "VARCHAR(23) NOT NULL"
+    "part": {
+      "part_bk": "integer not null",
+      "name": "varchar(55) not null",
+      "mfgr": "char(25) not null",
+      "brand": "char(10) not null",
+      "type": "varchar(25) not null",
+      "size": "integer not null",
+      "container": "char(10) not null",
+      "retailprice": "decimal(15,2) not null",
+      "comment": "varchar(23) not null"
     },
-    "SUPPLIER": {
-      "SUPPKEY": "INTEGER NOT NULL",
-      "NAME": "CHAR(55) NOT NULL",
-      "ADDRESS": "VARCHAR(40) NOT NULL",
-      "NATIONKEY": "INTEGER NOT NULL",
-      "PHONE": "CHAR(15) NOT NULL",
-      "ACCTBAL": "DECIMAL(15,2) NOT NULL",
-      "COMMENT": "VARCHAR(101) NOT NULL"
+    "supplier": {
+      "supplier_bk": "integer not null",
+      "name": "char(55) not null",
+      "address": "varchar(40) not null",
+      "nation_bk": "integer not null",
+      "phone": "char(15) not null",
+      "acctbal": "decimal(15,2) not null",
+      "comment": "varchar(101) not null"
     },
-    "PARTSUPP": {
-      "PARTKEY": "INTEGER NOT NULL",
-      "SUPPKEY": "INTEGER NOT NULL",
-      "AVAILQTY": "INTEGER NOT NULL",
-      "SUPPLYCOST": "DECIMAL(15,2) NOT NULL",
-      "COMMENT": "VARCHAR(199) NOT NULL"
+    "partsupp": {
+      "part_bk": "integer not null",
+      "supplier_bk": "integer not null",
+      "availqty": "integer not null",
+      "supplycost": "decimal(15,2) not null",
+      "comment": "varchar(199) not null"
     },
-    "CUSTOMER": {
-      "CUSTKEY": "INTEGER NOT NULL",
-      "NAME": "VARCHAR(25) NOT NULL",
-      "ADDRESS": "VARCHAR(40) NOT NULL",
-      "NATIONKEY": "INTEGER NOT NULL",
-      "PHONE": "CHAR(15) NOT NULL",
-      "ACCTBAL": "DECIMAL(15,2) NOT NULL",
-      "MKTSEGMENT": "CHAR(10) NOT NULL",
-      "COMMENT": "VARCHAR(117) NOT NULL"
+    "customer": {
+      "customer_bk": "integer not null",
+      "name": "varchar(25) not null",
+      "address": "varchar(40) not null",
+      "nation_bk": "integer not null",
+      "phone": "char(15) not null",
+      "acctbal": "decimal(15,2) not null",
+      "mktsegment": "char(10) not null",
+      "comment": "varchar(117) not null"
     },
-    "ORDERS": {
-      "ORDERKEY": "INTEGER NOT NULL",
-      "CUSTKEY": "INTEGER NOT NULL",
-      "ORDERSTATUS": "CHAR(1) NOT NULL",
-      "TOTALPRICE": "DECIMAL(15,2) NOT NULL",
-      "ORDERDATE": "DATE NOT NULL",
-      "ORDERPRIORITY": "CHAR(15) NOT NULL",
-      "CLERK": "CHAR(15) NOT NULL",
-      "SHIPPRIORITY": "INTEGER NOT NULL",
-      "COMMENT": "VARCHAR(79) NOT NULL"
+    "orders": {
+      "orders_bk": "integer not null",
+      "customer_bk": "integer not null",
+      "orderstatus": "char(1) not null",
+      "totalprice": "decimal(15,2) not null",
+      "orderdate": "date not null",
+      "orderpriority": "char(15) not null",
+      "clerk": "char(15) not null",
+      "shippriority": "integer not null",
+      "comment": "varchar(79) not null"
     },
-    "LINEITEM": {
-      "ORDERKEY": "INTEGER NOT NULL",
-      "PARTKEY": "INTEGER NOT NULL",
-      "SUPPKEY": "INTEGER NOT NULL",
-      "LINENUMBER": "INTEGER NOT NULL",
-      "QUANTITY": "DECIMAL(15,2) NOT NULL",
-      "EXTENDEDPRICE": "DECIMAL(15,2) NOT NULL",
-      "DISCOUNT": "DECIMAL(15,2) NOT NULL",
-      "TAX": "DECIMAL(15,2) NOT NULL",
-      "RETURNFLAG": "CHAR(1) NOT NULL",
-      "LINESTATUS": "CHAR(1) NOT NULL",
-      "SHIPDATE": "DATE NOT NULL",
-      "COMMITDATE": "DATE NOT NULL",
-      "RECEIPTDATE": "DATE NOT NULL",
-      "SHIPINSTRUCT": "CHAR(25) NOT NULL",
-      "SHIPMODE": "CHAR(10) NOT NULL",
-      "COMMENT": "VARCHAR(44) NOT NULL"
+    "lineitem": {
+      "orders_bk": "integer not null",
+      "part_bk": "integer not null",
+      "supplier_bk": "integer not null",
+      "lineitem_bk": "integer not null",
+      "quantity": "decimal(15,2) not null",
+      "extendedprice": "decimal(15,2) not null",
+      "discount": "decimal(15,2) not null",
+      "tax": "decimal(15,2) not null",
+      "returnflag": "char(1) not null",
+      "linestatus": "char(1) not null",
+      "shipdate": "date not null",
+      "commitdate": "date not null",
+      "receiptdate": "date not null",
+      "shipinstruct": "char(25) not null",
+      "shipmode": "char(10) not null",
+      "comment": "varchar(44) not null"
     },
-    "postfix": "launch_id int, effective_dttm timestamp default now()"
+    "postfix": ", launch_id int, effective_dttm timestamp default now()"
   },
   "dds": {
-    // from anchor model and shema.yaml
     "h_customer": {
-      "h_customer_id": "SERIAL PRIMARY KEY",
-      "h_customer_bk": "INTEGER UNIQUE NOT NULL"
+      "customer_id": "SERIAL PRIMARY KEY",
+      "customer_bk": "INTEGER UNIQUE NOT NULL"
     },
     "s_customer_name": {
-      "h_customer_id": "INTEGER NOT NULL",
+      "customer_id": "INTEGER NOT NULL",
       "name": "VARCHAR(25) NOT NULL"
     },
     "s_customer_address": {
-      "h_customer_id": "INTEGER NOT NULL",
+      "customer_id": "INTEGER NOT NULL",
       "address": "VARCHAR(40) NOT NULL"
     },
-    "s_customer_nationkey": {
-      "h_customer_id": "INTEGER NOT NULL",
-      "nationkey": "INTEGER NOT NULL"
-    },
     "s_customer_phone": {
-      "h_customer_id": "INTEGER NOT NULL",
+      "customer_id": "INTEGER NOT NULL",
       "phone": "CHAR(15) NOT NULL"
     },
     "s_customer_acctbal": {
-      "h_customer_id": "INTEGER NOT NULL",
+      "customer_id": "INTEGER NOT NULL",
       "acctbal": "DECIMAL(15,2) NOT NULL"
     },
     "s_customer_mktsegment": {
-      "h_customer_id": "INTEGER NOT NULL",
+      "customer_id": "INTEGER NOT NULL",
       "mktsegment": "CHAR(10) NOT NULL"
     },
     "s_customer_comment": {
-      "h_customer_id": "INTEGER NOT NULL",
+      "customer_id": "INTEGER NOT NULL",
       "comment": "VARCHAR(117) NOT NULL"
     },
     "h_part": {
-      "h_part_id": "SERIAL PRIMARY KEY",
-      "h_part_bk": "INTEGER UNIQUE NOT NULL"
+      "part_id": "SERIAL PRIMARY KEY",
+      "part_bk": "INTEGER UNIQUE NOT NULL"
     },
     "s_part_name": {
-      "h_part_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL",
       "name": "VARCHAR(55) NOT NULL"
     },
     "s_part_mfgr": {
-      "h_part_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL",
       "mfgr": "CHAR(25) NOT NULL"
     },
     "s_part_brand": {
-      "h_part_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL",
       "brand": "CHAR(10) NOT NULL"
     },
     "s_part_type": {
-      "h_part_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL",
       "type": "VARCHAR(25) NOT NULL"
     },
     "s_part_size": {
-      "h_part_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL",
       "size": "INTEGER NOT NULL"
     },
     "s_part_container": {
-      "h_part_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL",
       "container": "CHAR(10) NOT NULL"
     },
     "s_part_retailprice": {
-      "h_part_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL",
       "retailprice": "DECIMAL(15,2) NOT NULL"
     },
     "s_part_comment": {
-      "h_part_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL",
       "comment": "VARCHAR(23) NOT NULL"
     },
     "h_supplier": {
-      "h_supplier_id": "SERIAL PRIMARY KEY",
-      "h_supplier_bk": "INTEGER UNIQUE NOT NULL"
+      "supplier_id": "SERIAL PRIMARY KEY",
+      "supplier_bk": "INTEGER UNIQUE NOT NULL"
     },
     "s_supplier_name": {
-      "h_supplier_id": "INTEGER NOT NULL",
+      "supplier_id": "INTEGER NOT NULL",
       "name": "CHAR(55) NOT NULL"
     },
     "s_supplier_address": {
-      "h_supplier_id": "INTEGER NOT NULL",
+      "supplier_id": "INTEGER NOT NULL",
       "address": "VARCHAR(40) NOT NULL"
     },
-    "s_supplier_nationkey": {
-      "h_supplier_id": "INTEGER NOT NULL",
-      "nationkey": "INTEGER NOT NULL"
-    },
     "s_supplier_phone": {
-      "h_supplier_id": "INTEGER NOT NULL",
+      "supplier_id": "INTEGER NOT NULL",
       "phone": "CHAR(15) NOT NULL"
     },
     "s_supplier_acctbal": {
-      "h_supplier_id": "INTEGER NOT NULL",
+      "supplier_id": "INTEGER NOT NULL",
       "acctbal": "DECIMAL(15,2) NOT NULL"
     },
     "s_supplier_comment": {
-      "h_supplier_id": "INTEGER NOT NULL",
+      "supplier_id": "INTEGER NOT NULL",
       "comment": "VARCHAR(101) NOT NULL"
     },
     "h_partsupp": {
-      "h_partsupp_id": "SERIAL PRIMARY KEY",
-      "h_partsupp_bk": "INTEGER UNIQUE NOT NULL"
+      "partsupp_id": "SERIAL PRIMARY KEY",
+      "partsupp_bk":  "TEXT UNIQUE NOT NULL"
     },
     "s_partsupp_availqty": {
-      "h_partsupp_id": "INTEGER NOT NULL",
+      "partsupp_id": "INTEGER NOT NULL",
       "availqty": "INTEGER NOT NULL"
     },
     "s_partsupp_supplycost": {
-      "h_partsupp_id": "INTEGER NOT NULL",
+      "partsupp_id": "INTEGER NOT NULL",
       "supplycost": "DECIMAL(15,2) NOT NULL"
     },
     "s_partsupp_comment": {
-      "h_partsupp_id": "INTEGER NOT NULL",
+      "partsupp_id": "INTEGER NOT NULL",
       "comment": "VARCHAR(199) NOT NULL"
     },
     "h_lineitem": {
-      "h_lineitem_id": "SERIAL PRIMARY KEY",
-      "h_lineitem_bk": "INTEGER UNIQUE NOT NULL"
-    },
-    "s_lineitem_linenumber": {
-      "h_lineitem_id": "INTEGER NOT NULL",
-      "linenumber": "INTEGER NOT NULL"
+      "lineitem_id": "SERIAL PRIMARY KEY",
+      "lineitem_bk": "INTEGER UNIQUE NOT NULL"
     },
     "s_lineitem_quantity": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "quantity": "DECIMAL(15,2) NOT NULL"
     },
     "s_lineitem_extendedprice": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "extendedprice": "DECIMAL(15,2) NOT NULL"
     },
     "s_lineitem_discount": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "discount": "DECIMAL(15,2) NOT NULL"
     },
     "s_lineitem_tax": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "tax": "DECIMAL(15,2) NOT NULL"
     },
     "s_lineitem_returnflag": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "returnflag": "CHAR(1) NOT NULL"
     },
     "s_lineitem_linestatus": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "linestatus": "CHAR(1) NOT NULL"
     },
     "s_lineitem_shipdate": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "shipdate": "DATE NOT NULL"
     },
     "s_lineitem_commitdate": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "commitdate": "DATE NOT NULL"
     },
     "s_lineitem_receiptdate": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "receiptdate": "DATE NOT NULL"
     },
     "s_lineitem_shipinstruct": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "shipinstruct": "CHAR(25) NOT NULL"
     },
     "s_lineitem_shipmode": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "shipmode": "CHAR(10) NOT NULL"
     },
     "s_lineitem_comment": {
-      "h_lineitem_id": "INTEGER NOT NULL",
+      "lineitem_id": "INTEGER NOT NULL",
       "comment": "VARCHAR(44) NOT NULL"
     },
     "h_orders": {
-      "h_orders_id": "SERIAL PRIMARY KEY",
-      "h_orders_bk": "INTEGER UNIQUE NOT NULL"
+      "orders_id": "SERIAL PRIMARY KEY",
+      "orders_bk": "INTEGER UNIQUE NOT NULL"
     },
     "s_orders_orderstatus": {
-      "h_orders_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL",
       "orderstatus": "CHAR(1) NOT NULL"
     },
     "s_orders_totalprice": {
-      "h_orders_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL",
       "totalprice": "DECIMAL(15,2) NOT NULL"
     },
     "s_orders_orderdate": {
-      "h_orders_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL",
       "orderdate": "DATE NOT NULL"
     },
     "s_orders_orderpriority": {
-      "h_orders_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL",
       "orderpriority": "CHAR(15) NOT NULL"
     },
     "s_orders_clerk": {
-      "h_orders_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL",
       "clerk": "CHAR(15) NOT NULL"
     },
     "s_orders_shippriority": {
-      "h_orders_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL",
       "shippriority": "INTEGER NOT NULL"
     },
     "s_orders_comment": {
-      "h_orders_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL",
       "comment": "VARCHAR(79) NOT NULL"
     },
     "h_nation": {
-      "h_nation_id": "SERIAL PRIMARY KEY",
-      "h_nation_bk": "INTEGER UNIQUE NOT NULL"
+      "nation_id": "SERIAL PRIMARY KEY",
+      "nation_bk": "INTEGER UNIQUE NOT NULL"
     },
     "s_nation_name": {
-      "h_nation_id": "INTEGER NOT NULL",
+      "nation_id": "INTEGER NOT NULL",
       "name": "CHAR(25) NOT NULL"
     },
     "s_nation_comment": {
-      "h_nation_id": "INTEGER NOT NULL",
+      "nation_id": "INTEGER NOT NULL",
       "comment": "VARCHAR(152)"
     },
     "h_region": {
-      "h_region_id": "SERIAL PRIMARY KEY",
-      "h_region_bk": "INTEGER UNIQUE NOT NULL"
+      "region_id": "SERIAL PRIMARY KEY",
+      "region_bk": "INTEGER UNIQUE NOT NULL"
     },
     "s_region_name": {
-      "h_region_id": "INTEGER NOT NULL",
+      "region_id": "INTEGER NOT NULL",
       "name": "CHAR(25) NOT NULL"
     },
     "s_region_comment": {
-      "h_region_id": "INTEGER NOT NULL",
+      "region_id": "INTEGER NOT NULL",
       "comment": "VARCHAR(152)"
     },
     "l_nation_region": {
-      "h_nation_id": "INTEGER NOT NULL",
-      "h_region_id": "INTEGER NOT NULL"
+      "nation_id": "INTEGER NOT NULL",
+      "region_id": "INTEGER NOT NULL"
     },
     "l_customer_nation": {
-      "h_customer_id": "INTEGER NOT NULL",
-      "h_nation_id": "INTEGER NOT NULL"
+      "customer_id": "INTEGER NOT NULL",
+      "nation_id": "INTEGER NOT NULL"
     },
     "l_orders_customer": {
-      "h_orders_id": "INTEGER NOT NULL",
-      "h_customer_id": "INTEGER NOT NULL"
+      "orders_id": "INTEGER NOT NULL",
+      "customer_id": "INTEGER NOT NULL"
     },
     "l_lineitem_orders": {
-      "h_lineitem_id": "INTEGER NOT NULL",
-      "h_orders_id": "INTEGER NOT NULL"
+      "lineitem_id": "INTEGER NOT NULL",
+      "orders_id": "INTEGER NOT NULL"
     },
     "l_lineitem_partsupp": {
-      "h_lineitem_id": "INTEGER NOT NULL",
-      "h_partsupp_id": "INTEGER NOT NULL"
+      "lineitem_id": "INTEGER NOT NULL",
+      "partsupp_id": "INTEGER NOT NULL"
     },
     "l_partsupp_supplier": {
-      "h_partsupp_id": "INTEGER NOT NULL",
-      "h_supplier_id": "INTEGER NOT NULL"
+      "partsupp_id": "INTEGER NOT NULL",
+      "supplier_id": "INTEGER NOT NULL"
     },
     "l_partsupp_part": {
-      "h_partsupp_id": "INTEGER NOT NULL",
-      "h_part_id": "INTEGER NOT NULL"
+      "partsupp_id": "INTEGER NOT NULL",
+      "part_id": "INTEGER NOT NULL"
     },
     "l_supplier_nation": {
-      "h_supplier_id": "INTEGER NOT NULL",
-      "h_nation_id": "INTEGER NOT NULL"
+      "supplier_id": "INTEGER NOT NULL",
+      "nation_id": "INTEGER NOT NULL"
     },
-    "postfix": "launch_id int, effective_dttm timestamp default now()"
+    "postfix": ", launch_id int, effective_dttm timestamp default now()"
   },
   "public": {
     "statistic": {
@@ -437,6 +422,6 @@
       "row_count": "int",
       "duration": "int"
     },
-    "postfix": "load_date date"
+    "postfix": ", load_date date"
   }
 }
