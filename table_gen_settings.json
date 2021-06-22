@@ -1,0 +1,17 @@
+{
+  "public": {
+    "report": {
+      "date": "timestamp",
+      "card": "CHAR(10) NOT NULL",
+      "currency": "CHAR(5) NOT NULL",
+      "payment": "numeric(15,2)",
+      "mcc": "INTEGER NOT NULL",
+      "transaction": "numeric(15,2)"
+    },
+    "mcc": {
+      "mcc": "INTEGER NOT NULL",
+      "description": "text"
+    },
+    "postfix": ""
+  }
+}
